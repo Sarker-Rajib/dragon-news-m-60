@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Container } from 'react-bootstrap';
+import { Button, Container, Image } from 'react-bootstrap';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
@@ -8,7 +8,14 @@ import { AuthContext } from '../../../Context/AuthProvider/Authprovider';
 import LeftSIdeNav from '../LeftSideNav/LeftSIdeNav';
 
 const Header = () => {
-   const {user} = useContext(AuthContext);
+   const { user, logOut } = useContext(AuthContext);
+
+   const handleLogOut = () => {
+      logOut()
+         .then(() => { })
+         .catch(error => console.error(error));
+   }
+
    return (
       <Navbar collapseOnSelect expand="lg" bg="light" variant="light" className="mb-3">
          <Container>
@@ -31,10 +38,35 @@ const Header = () => {
                   </NavDropdown>
                </Nav>
                <Nav>
-                  <Nav.Link href="#deets"><span className="text-success fs-5">{user?.displayName}</span></Nav.Link>
-                  <Nav.Link eventKey={2} href="#memes">
-                     Dank memes
-                  </Nav.Link>
+
+                  {
+                     user?.uid ?
+                        <>
+                           <span>{user?.email}</span>
+                           <span className="text-success me-2 fs-5">{user?.displayName}</span>
+                           {user?.photoURL ?
+                              <Image
+                                 style={{ height: '35px' }}
+                                 src={user.photoURL}></Image>
+                              : <p>No I</p>
+                           }
+                           <Button onClick={handleLogOut} className="ms-2">Log Out</Button>
+                        </>
+                        :
+                        <>
+                           <Link className='fs-5 me-3' to='/login'>Login</Link>
+                           <Link className='fs-5' to='/register'>Register</Link>
+                        </>
+                  }
+
+                  {/* <Nav.Link eventKey={2} href="#memes">
+                     {user?.photoURL ?
+                        <Image
+                           style={{ height: '35px' }}
+                           src={user.photoURL}></Image>
+                        : <p>No I</p>
+                     }
+                  </Nav.Link> */}
                </Nav>
 
                <div className="d-block d-lg-none">
