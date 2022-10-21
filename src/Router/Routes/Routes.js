@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import Profile from "../../Component/Profile/Profile";
 import TermsAndCondition from "../../Component/TermsAndCondition/TermsAndCondition";
 import Main from "../../Layout/Main/Main";
 import Category from "../../Pages/Category/Category";
@@ -39,6 +40,13 @@ export const routes = createBrowserRouter([
          {
             path: '/terms',
             element: <TermsAndCondition></TermsAndCondition>
+         },
+         {
+            path: '/profile',
+            element:
+               <PrivateRoute>
+                  <Profile></Profile>
+               </PrivateRoute>
          }
       ]
    },

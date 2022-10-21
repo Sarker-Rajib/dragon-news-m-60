@@ -45,9 +45,12 @@ const Header = () => {
                            <span>{user?.email}</span>
                            <span className="text-success me-2 fs-5">{user?.displayName}</span>
                            {user?.photoURL ?
-                              <Image
-                                 style={{ height: '35px' }}
-                                 src={user.photoURL}></Image>
+                              <Link to={'/profile'}>
+                                 <Image
+                                    style={{ height: '35px' }}
+                                    src={user.photoURL}>
+                                 </Image>
+                              </Link>
                               : <p>No I</p>
                            }
                            <Button onClick={handleLogOut} className="ms-2">Log Out</Button>
