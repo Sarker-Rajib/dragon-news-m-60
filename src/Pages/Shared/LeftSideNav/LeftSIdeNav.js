@@ -5,7 +5,7 @@ const LeftSIdeNav = () => {
 const [categories, setCategories] = useState([]);
 
 useEffect(() => {
-   fetch('http://localhost:5000/news-categories')
+   fetch('https://dragon-news-server-mo-60-node.vercel.app/news-categories')
    .then(res => res.json())
    .then(data => setCategories(data));
 }, []);
